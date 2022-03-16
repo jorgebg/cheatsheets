@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+
+  <!-- Load paper.css for happy printing -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>
+    @page {
+      size: A4 landscape
+    }
+
+    :root {
+      --base-font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: var(--base-font-size);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+
+    h1 {
+      font-size: calc(1.25 * var(--base-font-size));
+    }
+
+
+    h2 {
+      font-size: calc(1.15 * var(--base-font-size));
+    }
+
+
+    h3 {
+      font-size: calc(1.10 * var(--base-font-size));
+      font-style: italic;
+    }
+
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .grid-item {
+      float: left;
+      border: 2px solid #DDD;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .grid-item--width0 {
+      width: auto;
+    }
+
+    .grid-item--width25 {
+      width: 25%;
+    }
+
+    .grid-item--width50 {
+      width: 50%;
+    }
+
+    .grid-item--width75 {
+      width: 75%;
+    }
+
+    .grid-item--width100 {
+      width: 100%;
+    }
+
+    .grid-item thead tr {
+      background: #444;
+      color: #FFF;
+    }
+
+    .grid-item tbody tr:nth-child(even) {
+      background: #DDD
+    }
+
+    .grid-item th, .grid-item td {
+      padding: 0 5px;
+    }
+
+    /* Ensure first column fits all the content */
+    .grid-item tbody tr td:first-child {
+      max-width:100%;
+      white-space:nowrap;
+    }
+
+    .grid-item footer {
+      font-size: calc(0.8 * var(--base-font-size));
+      text-align: right;
+    }
+  </style>
+
+
+
+  <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="https://npmcdn.com/isotope-packery@2/packery-mode.pkgd.js"></script>
+  <script>
+    // Sections that overflow the page are carried over to another page
+
+    window.addEventListener('load', (event) => {
+      var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
+      while (nextItems.length > 0) {
+        var nextSheet = document.querySelector('template#page').content.cloneNode(true);
+        var nextGrid = nextSheet.querySelector('.grid');
+        nextSheet = document.body.appendChild(nextSheet);
+        nextGrid.append(...nextItems);
+
+        var iso = new Isotope(nextGrid, {
+          itemSelector: '.grid-item',
+          layoutMode: 'packery',
+          packery: {
+            gutter: 10
+          },
+          transitionDuration: 0,
+        });
+
+        var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
+
+        nextItems = []
+        for (const elem of iso.getItemElements()) {
+          if (elem.getBoundingClientRect().bottom > pageBottom) {
+            nextItems.push(elem);
+          }
+        }
+        if (nextItems.length > 0) {
+          iso.remove(nextItems);
+        }
+        for (const elem of nextItems) {
+          elem.removeAttribute("style");
+        }
+
+      }
+    });
+
+  </script>
+
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+
+<body class="A4 landscape">
+
+  <template id="page">
+    <div class="sheet padding-10mm">
+      <div class="grid">
+      </div>
+    </div>
+  </template>
+
+  <template id="items">
+    {% for section in section_list %}
+    <section class="grid-item grid-item--width{{ section.width }}">
+      {{ section.content_html }}
+      <footer>{{ section.footer }}</footer>
+    </section>
+    {% endfor %}
+  </template>
+
+</body>
+
+
+
+</html>
