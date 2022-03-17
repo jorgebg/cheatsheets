@@ -19,7 +19,7 @@ class EmbedImageInlineProcessor(LinkInlineProcessor):
     """ Return a embed img element from the given match. """
 
     def handleMatch(self, m, data):
-        from cheatsheeter.__main__ import args
+        from cheatsheeter.__main__ import cheatsheeter
 
         text, index, handled = self.getText(data, m.end(0))
         if not handled:
@@ -29,7 +29,7 @@ class EmbedImageInlineProcessor(LinkInlineProcessor):
         if not handled:
             return None, None, None
 
-        filename = os.path.join(args.source_path, unquote(src))
+        filename = os.path.join(cheatsheeter.source_path, unquote(src))
 
         if src.endswith('.svg'):
             el = etree.parse(filename).getroot()

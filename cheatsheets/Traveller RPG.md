@@ -48,3 +48,20 @@ width: 50
 
 !![2d6 Probabilities](assets/2d6%20probabilities.svg)
 
+~~~
+
+# Characteristics Modifiers
+
+,,,
+Characteristic,DM
+0,-3
+1-2,-2
+3-5,-1
+**6-8**,+0
+9-11,+1
+12-14,+2
+15-17,+3
+18-20,+4
+21-23,+5
+Every +3 thereafter,+1 to DM
+,,,

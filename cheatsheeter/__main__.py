@@ -1,5 +1,6 @@
 import argparse
 from dataclasses import dataclass
+from enum import Enum
 import os
 
 import markdown
@@ -11,13 +12,9 @@ DEFAULT_OUTPUT_FILE = '{source}.html'
 DEFAULT_SOURCE_PATH = './cheatsheets'
 DEFAULT_BUILD_PATH = './docs'
 
-parser = argparse.ArgumentParser(description='Cheatsheet creator.', prog="cheatsheeter")
-parser.add_argument('--source-path', default=DEFAULT_SOURCE_PATH, help='Source path')
-parser.add_argument('--build-path', default=DEFAULT_BUILD_PATH, help='Build path')
-parser.add_argument('--separator', default=DEFAULT_SECTION_SEPARATOR, help='Section separator')
-
-
-args = parser.parse_args()
+class Actions(Enum):
+    BUILD = 'build'
+    WATCH = 'watch'
 
 @dataclass
 class Section:
@@ -38,23 +35,23 @@ class Cheatsheeter:
         )
 
     def build(self):
-        os.makedirs(args.source_path, exist_ok=True)
-        os.makedirs(args.build_path, exist_ok=True)
+        print('Building from {}'.format(self.source_path))
+        os.makedirs(self.source_path, exist_ok=True)
+        os.makedirs(self.build_path, exist_ok=True)
 
         title_list = []
-        for filename in os.listdir(args.source_path):
+        for filename in os.listdir(self.source_path):
             if filename.endswith('.md'):
                 title_list.append(self._build_cheatsheet(filename))
         self._build_index(title_list)
-        
-
 
     def _build_cheatsheet(self, source_filename) -> str:
+        print('Building {}'.format(source_filename))
         title = os.path.splitext(source_filename)[0]
-        with open(os.path.join(args.source_path, source_filename)) as f:
+        with open(os.path.join(self.source_path, source_filename)) as f:
             src = f.read()
 
-        section_src_list = src.split(args.separator)
+        section_src_list = src.split(self.separator)
         section_list = []
 
         cheatsheet_template = self.template_env.get_template("cheatsheet.html")
@@ -69,7 +66,7 @@ class Cheatsheeter:
         output_html = cheatsheet_template.render(title=title, section_list=section_list)
 
         build_filename = title + '.html'
-        with open(os.path.join(args.build_path, build_filename), 'w') as f:
+        with open(os.path.join(self.build_path, build_filename), 'w') as f:
             f.write(output_html)
 
         return title
@@ -77,9 +74,25 @@ class Cheatsheeter:
     def _build_index(self, title_list):
         index_template = self.template_env.get_template("index.html")
         output_html = index_template.render(title_list=title_list)
-        with open(os.path.join(args.build_path, 'index.html'), 'w') as f:
+        with open(os.path.join(self.build_path, 'index.html'), 'w') as f:
             f.write(output_html)
 
+#TODO Refactor
+parser = argparse.ArgumentParser(description='Cheatsheet creator.', prog="cheatsheeter")
+parser.add_argument('--source-path', default=DEFAULT_SOURCE_PATH, help='Source path')
+parser.add_argument('--build-path', default=DEFAULT_BUILD_PATH, help='Build path')
+parser.add_argument('--separator', default=DEFAULT_SECTION_SEPARATOR, help='Section separator')
+parser.add_argument('--watch', default=False, action='store_true', help='watch for changes')
 
+args = parser.parse_args()  #TODO Refactor
 
-Cheatsheeter(**vars(args)).build()
+config = vars(args)
+watch = config.pop('watch')
+cheatsheeter = Cheatsheeter(**config)
+
+if __name__=='__main__':
+    if watch:
+        from . import watcher
+        watcher.start(cheatsheeter)
+    else:
+        cheatsheeter.build()
