@@ -10,6 +10,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Config repository
+        run: |
+          git config --global user.email "github-actions@jorgebg.com"
+          git config --global user.name "GitHub Actions"
+
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -32,8 +37,11 @@ jobs:
       - name: Build cheatsheets
         run: |
           pipenv run python3 -m cheatsheeter
+
+      - name: Push cheatsheets
+        run: |
           git add ./docs
-          git commit -m"Update cheatsheets"
+          git commit -m"Build cheatsheets"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
