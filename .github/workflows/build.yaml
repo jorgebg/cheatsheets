@@ -40,7 +40,7 @@ jobs:
 
       - name: Push cheatsheets
         run: |
-          git diff-index --quiet HEAD || (git add ./docs && git commit -m"Build cheatsheets")
+          git diff --exit-code || git commit -am"Build cheatsheets"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
