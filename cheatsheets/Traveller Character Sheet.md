@@ -16,7 +16,7 @@
 ~~~
 # Básicas
 ,,,
-⊕,ES,EN
+☆,ES,EN
 ,Administración,Admin
 ✓,Animales,
 ,Apostar,
