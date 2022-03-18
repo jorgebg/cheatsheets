@@ -1,10 +1,13 @@
 import time
+import os
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+from cheatsheeter.__main__ import Cheatsheeter
 
-def start(cheatsheeter):
+
+def start(cheatsheeter: Cheatsheeter):
     #TODO Refactor
     cheatsheeter.build()
     class FileChangesWatcher:
@@ -14,6 +17,7 @@ def start(cheatsheeter):
         def run(self):
             event_handler = Handler()
             self.observer.schedule(event_handler, cheatsheeter.source_path, recursive = True)
+            self.observer.schedule(event_handler, os.path.relpath(cheatsheeter.template_env.loader._template_root), recursive = True)
             self.observer.start()
             try:
                 while True:

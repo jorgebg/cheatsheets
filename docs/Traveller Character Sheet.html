@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Traveller Character Sheet</title>
+
+  <!-- Load paper.css for happy printing -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>
+    @page {
+      size: A4 landscape
+    }
+
+    :root {
+      --base-font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: var(--base-font-size);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+
+    h1 {
+      font-size: calc(1.25 * var(--base-font-size));
+    }
+
+
+    h2 {
+      font-size: calc(1.15 * var(--base-font-size));
+    }
+
+
+    h3 {
+      font-size: calc(1.10 * var(--base-font-size));
+      font-style: italic;
+    }
+
+    code {
+      white-space: nowrap;
+    }
+
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .grid-item {
+      float: left;
+      border: 2px solid #DDD;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .grid-item--width0 {
+      width: auto;
+    }
+
+    .grid-item--width10 {
+      width: 10%;
+    }
+
+    .grid-item--width20 {
+      width: 20%;
+    }
+
+    .grid-item--width30 {
+      width: 30%;
+    }
+
+    .grid-item--width40 {
+      width: 40%;
+    }
+
+    .grid-item--width50 {
+      width: 50%;
+    }
+
+    .grid-item--width60 {
+      width: 60%;
+    }
+
+    .grid-item--width70 {
+      width: 70%;
+    }
+
+    .grid-item--width80 {
+      width: 80%;
+    }
+
+    .grid-item--width90 {
+      width: 90%;
+    }
+
+    .grid-item--width100 {
+      width: 100%;
+    }
+
+    .grid-item > *, .grid-item > * > * {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid-item ul {
+      padding-inline-start: 20px;
+    }
+
+    .grid-item table {
+      margin-block-end: 1em;
+    }
+
+    .grid-item thead tr {
+      background: #444;
+      color: #FFF;
+    }
+
+    .grid-item tbody tr:nth-child(even) {
+      background: #DDD
+    }
+
+    .grid-item th, .grid-item td {
+      padding: 0 5px;
+    }
+
+    /* Ensure first column is centered and fits all the content */
+    .grid-item tbody tr td:first-child {
+      max-width:100%;
+      white-space:nowrap;
+      text-align: center;
+    }
+
+    .grid-item footer {
+      font-size: calc(0.8 * var(--base-font-size));
+      text-align: right;
+      clear: both;
+    }
+  </style>
+
+
+
+  <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="https://npmcdn.com/isotope-packery@2/packery-mode.pkgd.js"></script>
+  <script>
+    // Sections that overflow the page are carried over to another page
+    const ITERATION_LIMIT=100;
+    window.addEventListener('load', (event) => {
+      var iteration = 0;
+      var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
+      while (nextItems.length > 0 && iteration++ < ITERATION_LIMIT) {
+        var nextSheet = document.querySelector('template#page').content.cloneNode(true);
+        var nextGrid = nextSheet.querySelector('.grid');
+        nextSheet = document.body.appendChild(nextSheet);
+        nextGrid.append(...nextItems);
+
+        var iso = new Isotope(nextGrid, {
+          itemSelector: '.grid-item',
+          layoutMode: 'packery',
+          packery: {
+            gutter: 10
+          },
+          transitionDuration: 0,
+        });
+
+        var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
+
+        nextItems = []
+        for (const elem of iso.getItemElements()) {
+          if (elem.getBoundingClientRect().bottom > pageBottom) {
+            nextItems.push(elem);
+          }
+        }
+        if (nextItems.length > 0) {
+          iso.remove(nextItems);
+        }
+        for (const elem of nextItems) {
+          elem.removeAttribute("style");
+        }
+
+      }
+    });
+
+  </script>
+
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+
+<body class="A4 landscape">
+
+  <template id="page">
+    <div class="sheet padding-10mm">
+      <div class="grid">
+      </div>
+    </div>
+  </template>
+
+  <template id="items">
+    
+    <section class="grid-item grid-item--width0">
+      <div>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>STR</th>
+<th>DEX</th>
+<th>END</th>
+<th>INT</th>
+<th>EDU</th>
+<th>SOC</th>
+<th>DM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>-3</td>
+</tr>
+<tr>
+<td>1-2</td>
+<td>▢▢</td>
+<td>▢▢</td>
+<td>▢▢</td>
+<td>▢▢</td>
+<td>▢▢</td>
+<td>▢▢</td>
+<td>-2</td>
+</tr>
+<tr>
+<td>3-5</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>6-8</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+0</td>
+</tr>
+<tr>
+<td>9-11</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>12-14</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+2</td>
+</tr>
+<tr>
+<td>15-17</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+3</td>
+</tr>
+<tr>
+<td>18-20</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>21-23</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>▢▢▢</td>
+<td>+5</td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer></footer>
+    </section>
+    
+    <section class="grid-item grid-item--width0">
+      <h1>Básicas</h1>
+<div>
+<table>
+<thead>
+<tr>
+<th>⊕</th>
+<th>ES</th>
+<th>EN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Administración</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Animales</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Apostar</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Arte</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Astronavegación</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Atletismo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Auxiliar</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Bróker</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Callejear</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Ciencia</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Conducir</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Diplomacia</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Electrónica</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Explosivos</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Idioma</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Ingeniería</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Investigar</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Legislación</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Liderazgo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Mecánica</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Medicina</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Orientación</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Persuadir</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Polivalencia</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Profesión</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Reconocimiento</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Sigilo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Socializar</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Subterfugio</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Supervivencia</td>
+<td></td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Táctica</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Trajes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer></footer>
+    </section>
+    
+    <section class="grid-item grid-item--width0">
+      <div>
+<table>
+<thead>
+<tr>
+<th>Combate</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Armas de fuego</td>
+<td></td>
+</tr>
+<tr>
+<td>Armas de fuego</td>
+<td></td>
+</tr>
+<tr>
+<td>Armas de fuego</td>
+<td></td>
+</tr>
+<tr>
+<td>Armas pesadas</td>
+<td></td>
+</tr>
+<tr>
+<td>Armas pesadas</td>
+<td></td>
+</tr>
+<tr>
+<td>Artillería</td>
+<td></td>
+</tr>
+<tr>
+<td>Artillería</td>
+<td></td>
+</tr>
+<tr>
+<td>Combate CaC</td>
+<td></td>
+</tr>
+<tr>
+<td>Combate CaC</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer></footer>
+    </section>
+    
+    <section class="grid-item grid-item--width0">
+      <div>
+<table>
+<thead>
+<tr>
+<th>Transporte</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Navegar</td>
+<td></td>
+</tr>
+<tr>
+<td>Navegar</td>
+<td></td>
+</tr>
+<tr>
+<td>Pilotar</td>
+<td></td>
+</tr>
+<tr>
+<td>Pilotar</td>
+<td></td>
+</tr>
+<tr>
+<td>Pilotar</td>
+<td></td>
+</tr>
+<tr>
+<td>Volar</td>
+<td></td>
+</tr>
+<tr>
+<td>Volar</td>
+<td></td>
+</tr>
+<tr>
+<td>Volar</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer></footer>
+    </section>
+    
+  </template>
+
+</body>
+
+
+
+</html>

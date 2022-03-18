@@ -1,5 +1,6 @@
 import re
 from io import StringIO
+import csv
 
 from markdown.blockprocessors import BlockProcessor
 from markdown.extensions import Extension
@@ -8,6 +9,7 @@ import xml.etree.ElementTree as etree
 from prettytable import from_csv
 from markdown.util import AtomicString
 
+FALLBACK_DELIMITER = ','
 
 class CsvTablesProcessor(BlockProcessor):
     RE_CSV_START = r'^,{3}\s*\n' # start line, e.g., `,,,\n`
@@ -28,7 +30,10 @@ class CsvTablesProcessor(BlockProcessor):
                 # render table area inside a new div
                 e = etree.SubElement(parent, 'div')
                 csv_block = blocks[0:block_num + 1]
-                table = from_csv(StringIO(csv_block[0]))
+                try:
+                    table = from_csv(StringIO(csv_block[0]))
+                except csv.Error:
+                    table = from_csv(StringIO(csv_block[0]), delimiter=FALLBACK_DELIMITER)
                 for row in table.rows:
                     for i, value in enumerate(row):
                         row[i] = AtomicString(value)

@@ -28,7 +28,7 @@ class Cheatsheeter:
         self.source_path = source_path
         self.build_path = build_path
         self.separator = separator
-        self.md = markdown.Markdown(extensions=['extra', 'meta', 'cheatsheeter.extensions.csv_tables:CsvTablesExtension', 'cheatsheeter.extensions.embed_img:EmbedImageExtension'])
+        self.md = markdown.Markdown(extensions=['extra', 'md_in_html', 'meta', 'sane_lists', 'cheatsheeter.extensions.csv_tables:CsvTablesExtension', 'cheatsheeter.extensions.embed_img:EmbedImageExtension'])
         self.template_env = Environment(
             loader=PackageLoader("cheatsheeter"),
             # autoescape=select_autoescape()
@@ -72,10 +72,13 @@ class Cheatsheeter:
         return title
 
     def _build_index(self, title_list):
+        index_filename = os.path.join(self.build_path, 'index.html')
+        print('Building {}'.format(index_filename))
         index_template = self.template_env.get_template("index.html")
         output_html = index_template.render(title_list=title_list)
-        with open(os.path.join(self.build_path, 'index.html'), 'w') as f:
+        with open(index_filename, 'w') as f:
             f.write(output_html)
+        print('Open file://{}'.format(os.path.abspath(index_filename)))
 
 #TODO Refactor
 parser = argparse.ArgumentParser(description='Cheatsheet creator.', prog="cheatsheeter")
