@@ -1,4 +1,4 @@
-footer: Source: Geologic Time Mug philosophersguild.com/products/geologic-time-mug-1
+footer: Source: Geologic Time Mug
 
 # Geologic Timeline
 
@@ -29,4 +29,4 @@ Precambrian, Hadean, , , ~4600 Ma, "Earth forms."
 
 Other resources:
 
-- www.infoplease.com/math-science/earth-environment/table-of-geological-periods
+- [www.infoplease.com/math-science/earth-environment/table-of-geological-periods](https://www.infoplease.com/math-science/earth-environment/table-of-geological-periods)
