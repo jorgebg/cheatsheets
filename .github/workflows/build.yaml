@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Config repository
         run: |
@@ -42,8 +44,9 @@ jobs:
         run: |
           git diff --exit-code || git commit -am"Build cheatsheets"
 
-      - name: Push changes
+      - name: Push changes to GitHub Pages
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: gh-pages
+          force: true
