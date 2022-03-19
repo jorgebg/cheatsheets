@@ -131,6 +131,7 @@ Hits,Trait,Damage,Animal
 
 
 ~~~
+footer: House Rule
 width: 30
 
 # Hit Locations
