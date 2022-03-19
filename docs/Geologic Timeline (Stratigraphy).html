@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Geologic Timeline (Stratigraphy)</title>
+
+  <!-- Load paper.css for happy printing -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>
+    @page {
+      size: A4 landscape
+    }
+
+    :root {
+      --base-font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
+      font-size: var(--base-font-size);
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+
+    h1 {
+      font-size: calc(1.25 * var(--base-font-size));
+    }
+
+
+    h2 {
+      font-size: calc(1.15 * var(--base-font-size));
+    }
+
+
+    h3 {
+      font-size: calc(1.10 * var(--base-font-size));
+      font-style: italic;
+    }
+
+    code {
+      white-space: nowrap;
+    }
+
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .grid-item {
+      float: left;
+      border: 2px solid #DDD;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .grid-item--width0 {
+      width: auto;
+    }
+
+    .grid-item--width10 {
+      width: 10%;
+    }
+
+    .grid-item--width20 {
+      width: 20%;
+    }
+
+    .grid-item--width30 {
+      width: 30%;
+    }
+
+    .grid-item--width40 {
+      width: 40%;
+    }
+
+    .grid-item--width50 {
+      width: 50%;
+    }
+
+    .grid-item--width60 {
+      width: 60%;
+    }
+
+    .grid-item--width70 {
+      width: 70%;
+    }
+
+    .grid-item--width80 {
+      width: 80%;
+    }
+
+    .grid-item--width90 {
+      width: 90%;
+    }
+
+    .grid-item--width100 {
+      width: 100%;
+    }
+
+    .grid-item > *, .grid-item > * > * {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid-item ul {
+      padding-inline-start: 20px;
+    }
+
+    .grid-item table {
+      margin-block-end: 1em;
+    }
+
+    .grid-item thead tr {
+      background: #444;
+      color: #FFF;
+    }
+
+    .grid-item tbody tr:nth-child(even) {
+      background: #DDD
+    }
+
+    .grid-item th, .grid-item td {
+      padding: 0 5px;
+    }
+
+    /* Ensure first column is centered and fits all the content */
+    .grid-item tbody tr td:first-child {
+      max-width:100%;
+      white-space:nowrap;
+      text-align: center;
+    }
+
+    .grid-item footer {
+      font-size: calc(0.8 * var(--base-font-size));
+      text-align: right;
+      clear: both;
+    }
+  </style>
+
+
+
+  <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="https://npmcdn.com/isotope-packery@2/packery-mode.pkgd.js"></script>
+  <script>
+    // Sections that overflow the page are carried over to another page
+    const ITERATION_LIMIT=100;
+    window.addEventListener('load', (event) => {
+      var iteration = 0;
+      var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
+      while (nextItems.length > 0 && iteration++ < ITERATION_LIMIT) {
+        var nextSheet = document.querySelector('template#page').content.cloneNode(true);
+        var nextGrid = nextSheet.querySelector('.grid');
+        nextSheet = document.body.appendChild(nextSheet);
+        nextGrid.append(...nextItems);
+
+        var iso = new Isotope(nextGrid, {
+          itemSelector: '.grid-item',
+          layoutMode: 'packery',
+          packery: {
+            gutter: 10
+          },
+          transitionDuration: 0,
+        });
+
+        var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
+
+        nextItems = []
+        for (const elem of iso.getItemElements()) {
+          if (elem.getBoundingClientRect().bottom > pageBottom) {
+            nextItems.push(elem);
+          }
+        }
+        if (nextItems.length > 0) {
+          iso.remove(nextItems);
+        }
+        for (const elem of nextItems) {
+          elem.removeAttribute("style");
+        }
+
+      }
+    });
+
+  </script>
+
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+
+<body class="A4 landscape">
+
+  <template id="page">
+    <div class="sheet padding-10mm">
+      <div class="grid">
+      </div>
+    </div>
+  </template>
+
+  <template id="items">
+    
+    <section class="grid-item grid-item--width0">
+      <h1>Geologic Timeline</h1>
+<div>
+<table>
+<thead>
+<tr>
+<th>Eon</th>
+<th>Era</th>
+<th>Period</th>
+<th>Epoch</th>
+<th>Millions of years ago</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Quaternary</td>
+<td>Anthropocene</td>
+<td>0</td>
+<td>Humans alter Earth's geology, ecology, and biology to make their dreams come true.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Quaternary</td>
+<td>Holocene</td>
+<td>0.0117 Ma</td>
+<td>Humans civilize Earth, leave in rockets, return (no Plan B).</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Quaternary</td>
+<td>Pleistocene</td>
+<td>2.6 Ma</td>
+<td>Humans and Neanderthals hit it off.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Neogene</td>
+<td>Pliocene</td>
+<td>5.3 Ma</td>
+<td>Human relatives appear, walk upright, use tools.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Neogene</td>
+<td>Miocene</td>
+<td>23 Ma</td>
+<td>Climates warm, grassland flourish, flowering species run riot.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Paleogene</td>
+<td>Oligocene</td>
+<td>34 Ma</td>
+<td>Whales evolve ultrasonic hearing, largest land mammal appears.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Paleogene</td>
+<td>Eocene</td>
+<td>56 Ma</td>
+<td>Seasons return, early horses debut, whales take to the sea."</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Cenozoic</td>
+<td>Paleogene</td>
+<td>Paleocene</td>
+<td>66 Ma</td>
+<td>Mass extinction of flora and fauna, tiny mammals are fruitful and multiply.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Mesozoic</td>
+<td>Cretaceous</td>
+<td></td>
+<td>~145 Ma</td>
+<td>Flowering plants thrive, modern animals make an entrance.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Mesozoic</td>
+<td>Jurassic</td>
+<td></td>
+<td>201 Ma</td>
+<td>Dinosaurs abound, insects get larger when oxygen levels rises.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Mesozoic</td>
+<td>Triassic</td>
+<td></td>
+<td>252 Ma</td>
+<td>Dinosaurs, flying reptiles, and mammals appear as Pangaea drifts.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Permian</td>
+<td></td>
+<td>299 Ma</td>
+<td>Supercontinent Pangaea comes together.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Carboniferous</td>
+<td></td>
+<td>359 Ma</td>
+<td>Reptiles evolve, trilobites become few, oxygen rises.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Devonian</td>
+<td></td>
+<td>419 Ma</td>
+<td>The first insects and forests evolve in the Age of Fishes</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Silurian</td>
+<td></td>
+<td>444 Ma</td>
+<td>Plants and arachnids conquer land, coral reefs colonize the shallows.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Ordovician</td>
+<td></td>
+<td>485 Ma</td>
+<td>Marine species thrive, first life on land ends in 20 Ma ice age.</td>
+</tr>
+<tr>
+<td>Phanerozoic</td>
+<td>Paleozoic</td>
+<td>Cambrian</td>
+<td></td>
+<td>541 Ma</td>
+<td>Trilobites predominate during evolutionary. Cambrian Explosion.</td>
+</tr>
+<tr>
+<td>Precambrian</td>
+<td>Proterozoic</td>
+<td></td>
+<td></td>
+<td>~2500 Ma</td>
+<td>Oldest macroscopic organism  known.</td>
+</tr>
+<tr>
+<td>Precambrian</td>
+<td>Archean</td>
+<td></td>
+<td></td>
+<td>~4000 Ma</td>
+<td>Life begins, evolves, leaves first fossils.</td>
+</tr>
+<tr>
+<td>Precambrian</td>
+<td>Hadean</td>
+<td></td>
+<td></td>
+<td>~4600 Ma</td>
+<td>Earth forms.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Other resources:</p>
+<ul>
+<li>www.infoplease.com/math-science/earth-environment/table-of-geological-periods</li>
+</ul>
+      <footer>Source: Geologic Time Mug philosophersguild.com/products/geologic-time-mug-1</footer>
+    </section>
+    
+  </template>
+
+</body>
+
+
+
+</html>
