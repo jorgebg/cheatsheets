@@ -143,10 +143,15 @@
       padding: 0 5px;
     }
 
-    /* Ensure first column is centered and fits all the content */
+    /* Ensure first column fits all the content */
     .grid-item tbody tr td:first-child {
       max-width:100%;
       white-space:nowrap;
+    }
+
+
+    /* Ensure first column is centered*/
+    .grid-item tbody tr td:first-child:not([align]) {
       text-align: center;
     }
 
@@ -166,6 +171,7 @@
     const ITERATION_LIMIT=100;
     window.addEventListener('load', (event) => {
       var iteration = 0;
+      var numPrevItems = null;
       var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
       while (nextItems.length > 0 && iteration++ < ITERATION_LIMIT) {
         var nextSheet = document.querySelector('template#page').content.cloneNode(true);
@@ -184,11 +190,15 @@
 
         var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
 
+        numPrevItems = nextItems.length;
         nextItems = []
         for (const elem of iso.getItemElements()) {
           if (elem.getBoundingClientRect().bottom > pageBottom) {
             nextItems.push(elem);
           }
+        }
+        if (numPrevItems == nextItems.length) {
+          break;
         }
         if (nextItems.length > 0) {
           iso.remove(nextItems);

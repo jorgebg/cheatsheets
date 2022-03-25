@@ -143,10 +143,15 @@
       padding: 0 5px;
     }
 
-    /* Ensure first column is centered and fits all the content */
+    /* Ensure first column fits all the content */
     .grid-item tbody tr td:first-child {
       max-width:100%;
       white-space:nowrap;
+    }
+
+
+    /* Ensure first column is centered*/
+    .grid-item tbody tr td:first-child:not([align]) {
       text-align: center;
     }
 
@@ -166,6 +171,7 @@
     const ITERATION_LIMIT=100;
     window.addEventListener('load', (event) => {
       var iteration = 0;
+      var numPrevItems = null;
       var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
       while (nextItems.length > 0 && iteration++ < ITERATION_LIMIT) {
         var nextSheet = document.querySelector('template#page').content.cloneNode(true);
@@ -184,11 +190,15 @@
 
         var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
 
+        numPrevItems = nextItems.length;
         nextItems = []
         for (const elem of iso.getItemElements()) {
           if (elem.getBoundingClientRect().bottom > pageBottom) {
             nextItems.push(elem);
           }
+        }
+        if (numPrevItems == nextItems.length) {
+          break;
         }
         if (nextItems.length > 0) {
           iso.remove(nextItems);
@@ -224,99 +234,99 @@
       <footer></footer>
     </section>
     
-    <section class="grid-item grid-item--width30">
+    <section class="grid-item grid-item--width50">
       <h1>Iniciativa</h1>
-<p>Chequeo de <strong><code>DES</code></strong> o <strong><code>INT</code></strong>.</p>
-<p>El <strong>Efecto</strong> es la <strong>Iniciativa</strong>.</p>
+<p>Chequeo de <strong><code>DES</code></strong> o <strong><code>INT</code></strong>. El <strong>Efecto</strong> resultante es la <strong>Iniciativa</strong>.</p>
 <p>En caso de empate, el que tenga el mayor valor de <code>DES</code> va primero. Si aun así siguen empatados, entonces
 actúan a la vez.</p>
 <h2>Emboscadas</h2>
 <p>Se modifica la Iniciativa <strong>solo durante la primera ronda</strong>:</p>
 <ul>
 <li>Emboscadores: +6</li>
-<li>Emboscados: -6</li>
+<li>Emboscados: −6</li>
 </ul>
 <h2>Táctica</h2>
-<p>Mientras no sea sorprendido, un combatiente puede hacer un chequeo de <code>Táctica</code> <strong>al
+<p>Mientras no sea emboscado, un Viajero puede hacer un chequeo de <code>Táctica</code> <strong>al
 comienzo del combate</strong>. El Efecto de esta tirada se aplica a
 la Iniciativa de todos los miembros del mismo bando.</p>
 <h2>Adelantarse *</h2>
-<p>At the start of each combat round a character may declare that he is acting hastily. This gives him a +2 bonus to his Initiative for that round only but all his actions receive a –1 DM. A character can only hasten once.</p>
+<p>Al inicio de cada ronda, un Viajero puede declarar adelantarse. Recibe +2 a su Iniciativa durante esa ronda, pero todas sus acciones reciben un MD −1.
+No puede adelantarse varias veces en la misma ronda.</p>
 <h2>Retrasarse *</h2>
-<p>A character does not have to act when his turn comes up in the Initiative order. He may act at any later point during the round, even interrupting another's actions to do so. When he acts, his Initiative is set to the count on which he acted. If the character has not acted by the end of the round he may choose to act first in the next round, effectively giving up his actions in the previous round in exchange for an Initiative advantage. His new Initiative is set to one higher than that of the current first person in the order. When multiple characters are delaying and all wish to act first in the following round, their Initiatives are all set to the same score and they act in Dexterity order as normal.</p>
+<p>Un Viajero puede retrasar sus acciones a cualquier momento posterior a su turno, incluso interrumpiendo las acciones de los demás.
+Su Iniciativa pasará a tener el valor del turno en el que ha actuado.
+Si al final de la ronda el Viajero no ha actuado, puede actuar el primero en la siguiente ronda, y su Iniciativa pasará a ser un punto más alto que la Iniciativa más alta.</p>
 <h2>Alcance</h2>
-<p>En la mayoría de los combates, los combatientes comienzan a alcance Medio (11-50m)</p>
+<p>En la mayoría de los combates, los Viajeros comienzan a alcance Medio (11-50m)</p>
       <footer>* Reglas de Cepheus Engine</footer>
     </section>
     
-    <section class="grid-item grid-item--width0">
+    <section class="grid-item grid-item--width50">
       <h1>Plazos</h1>
-<div>
 <table>
 <thead>
 <tr>
-<th>Plazo</th>
+<th align="left">Plazo</th>
 <th>Incremento</th>
 <th>Ejemplo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1D segundos</td>
+<td align="left">1D segundos</td>
 <td>Un segundo</td>
 <td>Atacar, saltar</td>
 </tr>
 <tr>
-<td>1D turnos</td>
-<td>Turno (6 segundos)</td>
-<td></td>
+<td align="left">1D turnos</td>
+<td>Un turno</td>
+<td>Seis segundos</td>
 </tr>
 <tr>
-<td>1D x 10 segundos</td>
+<td align="left">1D x 10 segundos</td>
 <td>Diez segundos</td>
 <td>Redireccionar energía, abrir canales de comunicación</td>
 </tr>
 <tr>
-<td>1D minutos</td>
+<td align="left">1D minutos</td>
 <td>Un minuto</td>
 <td>Primeros Auxilios, Aterrizaje seguro, tareas técnicas básicas</td>
 </tr>
 <tr>
-<td>1D x 10 minutos</td>
+<td align="left">1D x 10 minutos</td>
 <td>Diez minutos</td>
 <td>Tareas técnicas más complejas, registrar un área de forma meticulosa</td>
 </tr>
 <tr>
-<td>1D horas</td>
+<td align="left">1D horas</td>
 <td>Una hora</td>
 <td>Construir un refugio, atravesar la espesura salvaje</td>
 </tr>
 <tr>
-<td>1D x 4 horas</td>
+<td align="left">1D x 4 horas</td>
 <td>Cuatro horas</td>
 <td>Investigar un problema</td>
 </tr>
 <tr>
-<td>1D x 10 horas</td>
+<td align="left">1D x 10 horas</td>
 <td>Diez horas</td>
 <td>Reparar una nave dañada</td>
 </tr>
 <tr>
-<td>1D días</td>
+<td align="left">1D días</td>
 <td>Un día</td>
 <td>Peinar una ciudad en busca de una persona desaparecida</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>Apresurarse: MD -2 por cada nivel de incremento reducido.</p>
-<p>Demorarse: MD -2 por cada nivel de incremento aumentado.</p>
+<p><strong>Apresurarse</strong>: MD -2 por cada nivel reducido.</p>
+<p><strong>Demorarse</strong>: MD +2 por cada nivel aumentado.</p>
       <footer></footer>
     </section>
     
     <section class="grid-item grid-item--width0">
       <h1>Acciones</h1>
-<p>En cada turno un combatiente puede:</p>
+<p>En cada turno un Viajero puede:</p>
 <ul>
 <li>Realizar una acción Mayor y una acción Menor.</li>
 <li>Realizar tres acciones Menores.</li>
@@ -325,56 +335,29 @@ la Iniciativa de todos los miembros del mismo bando.</p>
     </section>
     
     <section class="grid-item grid-item--width0">
-      <p>ACCIONES MAYORES
-Un Viajero puede realizar una acción Mayor en cada turno
-de combate, entre las que puede escoger:</p>
-<p>Atacar
-La acción Mayor más utilizada en combate es el ataque.
-Un ataque es un intento de dañar o herir a un enemigo
-con armas a distancia o cuerpo a cuerpo, tales como un
-cuchillo o un rifle.
-El Viajero declara que va a atacar y selecciona al objetivo. Este objetivo puede en ese momento escoger una
-Reacción. A continuación, el Viajero realiza un chequeo
-de la habilidad apropiada y, como es normal en cualquier
-chequeo Normal, si obtiene un valor de 8+, el ataque
-tiene éxito y daña al objetivo (ver Daño en página 74).
-El chequeo estándar utilizado al realizar un ataque es la
-siguiente:</p>
+      <p>ACCIONES MAYORES</p>
+<p>Atacar</p>
 <p>Ataque cuerpo a cuerpo
-2D + Combate CaC (especialidad apropiada) + MD de
-FUE o DES</p>
+2D + Combate CaC (especialidad apropiada) + MD de FUE o DES</p>
 <p>Ataque a distancia
-2D + Armas de fuego (especialidad apropiada) + MD de DES</p>
-<p>Los modificadores se utilizan habitualmente para influir en
-los chequeos de ataque con Armas de fuego (o Armas Pesadas o Atletismo) como se muestra en la tabla más abajo.</p>
-<p>Acciones Menores
-En vez de realizar una acción Mayor, un Viajero puede
-realizar en su lugar dos acciones Menores, dándole un
-total de tres acciones Menores durante ese turno de combate (las dos obtenidas de la acción Mayor más la acción
-Menor que recibe por cada turno).</p>
+Disparar: 2D + Armas de fuego o pesadas (especialidad apropiada) + MD de DES
+Lanzar: 2D + Atletismo (destreza) + MD de DES</p>
 <p>Miscelánea
 Un Viajero puede hacer un chequeo de habilidad o algo diferente como acción Mayor cuando requiera su total atención,
 concentración, acciones físicas o mentales complicadas, o
 una combinación de ellas. Estas incluyen las siguientes:
-•
-•
-•
-•
-•</p>
-<p>Aplicar primeros auxilios a un compañero herido.
-Tratar de esquivar el sistema de seguridad para obtener acceso a un búnker.
-Utilizar un poder psiónico.
-Dar órdenes a sus seguidores.
-Solicitar un ataque de ortillería.</p>
-<p>ACCIONES MENORES
-Un Viajero puede normalmente realizar una sola acción
-Menor por cada turno de combate, aunque puede realizar
-hasta tres si ignora su acción Mayor.</p>
-<p>Apuntar
-Un Viajero que pase una acción Menor apuntando a un
-objetivo recibe MD+1 a su siguiente tirada de ataque a
+- Aplicar primeros auxilios a un compañero herido.
+- Tratar de esquivar el sistema de seguridad para obtener acceso a un búnker.
+- Utilizar un poder psiónico.
+- Dar órdenes a sus seguidores.
+- Solicitar un ataque de artillería.</p>
+<p>ACCIONES MENORES</p>
+<p>Apuntar</p>
+<p>MD+1 a la siguiente tirada de ataque a
 distancia contra su objetivo, mientras no haga nada más
-que apuntar. Un Viajero puede usar acciones Menores</p>
+que apuntar. Un Viajero puede usar acciones Menores consecutivas para apuntar, ganando así un máximo de
+MD+6 en el ataque si es capaz de invertir seis acciones Menores consecutivas apuntando al mismo objetivo
+mientras no haga nada más.</p>
 <p>Modificadores comunes
 Bonos
 Apuntar
@@ -395,9 +378,6 @@ Objetivo a cubierto
 Objetivo tumbado
 -1</p>
 <p>71</p>
-<p>consecutivas para apuntar, ganando así un máximo de
-MD+6 en el ataque si es capaz de invertir seis acciones Menores consecutivas apuntando al mismo objetivo
-mientras no haga nada más.</p>
 <p>mientras estalla un tiroteo a su alrededor, por ejemplo,
 o puede estar tratando desesperadamente de arreglar el
 motor de un repulsor para que él y sus amigos puedan
