@@ -166,8 +166,9 @@
     const ITERATION_LIMIT=100;
     window.addEventListener('load', (event) => {
       var iteration = 0;
+      var numPrevItems = null;
       var nextItems = document.querySelector('template#items').content.cloneNode(true).children;
-      while (nextItems.length > 0 && iteration++ < ITERATION_LIMIT) {
+      while (nextItems.length > 0 && numPrevItems != nextItems.length && iteration++ < ITERATION_LIMIT) {
         var nextSheet = document.querySelector('template#page').content.cloneNode(true);
         var nextGrid = nextSheet.querySelector('.grid');
         nextSheet = document.body.appendChild(nextSheet);
@@ -184,6 +185,7 @@
 
         var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
 
+        numPrevItems = nextItems.lenght;
         nextItems = []
         for (const elem of iso.getItemElements()) {
           if (elem.getBoundingClientRect().bottom > pageBottom) {
