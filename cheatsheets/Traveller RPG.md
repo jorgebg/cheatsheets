@@ -18,6 +18,7 @@ Difficulty,Target
 "Difficult","10+"
 "Very Difficult","12+"
 "Formidable","14+"
+"Impossible","16+"
 ,,,
 
 ~~~
@@ -68,6 +69,7 @@ Decepcion
 Diplomacy
 Recon
 Stealth
+...
 ,,,
 
 ~~~
@@ -110,6 +112,58 @@ Level,Cost
 
 
 ~~~
+
+# Lower Technology Levels
+
+## Up to Earth's 21st century
+
+,,,
+TL,Primitive
+TL 0, "No technology. TL 0 species have only discovered the simplest tools and principles, and are on a par with Earth’s Stone Age."
+TL 1, "Roughly on a par with Bronze or Iron age technology. TL 1 science is mostly superstition, but they can manufacture weapons and work metals."
+TL 2, "Renaissance technology. TL 2 brings with it a greater understanding of chemistry, physics, biology and astronomy as well as the scientific method."
+TL 3, "The advances of TL 2 are now applied, bringing the germ of industrial revolution and steam power. Primitive firearms now dominate the battlefield. This is roughly comparable to the early 19th century."
+,,,
+
+,,,
+TL,Industrial
+TL 4, "The transition to industrial revolution is complete, bringing plastics, radio and other such inventions. Roughly comparable to the late 19th/early 20th century."
+TL 5, "TL 5 brings widespread electrification, telecommunications and internal combustion. At the high end of the TL, atomics and primitive computing appear. Roughly on a par with the mid–20th century."
+TL 6, "TL 6 brings the development of fission power and more advanced computing. Advances in materials technology and rocketry bring about the dawn of the space age."
+,,,
+
+,,,
+,Pre-Stellar
+TL 7, "A pre-stellar society can reach orbit reliably and has telecommunications satellites. Computers become common._ At the time of writing, humanity is currently somewhere between TL 7 and TL 8._"
+TL 8, "At TL 8, it is possible to reach other worlds in the same system, although terraforming or full colonization are not within the culture’s capacity. Permanent space habitats become possible. Fusion power becomes commercially viable."
+TL 9, "The defining element of TL 9 is the development of gravity manipulation, which makes space travel vastly safer and faster. This research leads to development of the Jump drive, which occurs near the end of this Tech Level. TL 9 cultures can colonize other worlds, although going to a colony is generally a one-way trip."
+,,,
+
+~~~
+
+# Upper Technology Levels
+
+,,,
+TL,Early Stellar
+TL 10, "With the advent of Jump, nearby systems are opened up. Orbital habitats and factories become common. Interstellar travel and trade lead to an economic boom. Colonies become much more viable."
+TL 11, "The first true artificial intelligences become possible, as computers are able to model synaptic networks. Grav-supported structures reach to the heavens. Jump–2 travel becomes possible, allowing easier travel beyond the one-Jump stellar mains."
+,,,
+
+,,,
+TL,Average Stellar
+TL 12, "Weather control revolutionizes terraforming and agriculture. Man-portable plasma weapons and carrier-mounted fusion guns make the battlefield untenable for unarmored combatants. Jump–3 travel is developed."
+TL 13, "Battledress appears on the battlefield in response to the new weapons. Cloning of body parts becomes easy. Advances in hull design and thruster plates means that spacecraft can easily enter atmosphere and even go underwater. Jump–4 travel."
+TL 14, "Fusion weapons become man-portable. Flying cities appear. Jump–5 travel."
+,,,
+
+,,,
+TL,High Stellar
+TL 15, "Black globe generators suggest a new direction for defensive technologies, while the development of synthetic anagathics means that the human lifespan is now vastly increased. Jump–6 travel."
+,,,
+
+
+
+~~~
 footer: Core Rules, page 81
 
 # Animals
@@ -131,16 +185,34 @@ Hits,Trait,Damage,Animal
 
 
 ~~~
-footer: House Rule
-width: 30
+footer: Core Rules, page 74
+width: 40
+
+# Damage
+
+Add the Effect of the attack roll to this damage.
+
+- Damage is applied initially to the target’s `END`.
+- If a target is reduced to `END 0`, then further damage is subtracted from the
+target’s `STR` or `DEX` (target’s choice, but all the damage from
+a single attack must be subtracted from a single statistic).
+- If either `STR` or `DEX` is reduced to 0, the character is unconscious
+and any further damage is subtracted from the remaining physical
+characteristic.
+- If all three physical characteristics are reduced to 0,
+the character is killed.
+
+~~~
+footer: Companion, page 51
 
 # Hit Locations
 
 ,,,
-Result,Location,Wounds
-6,Head,DEX→END→STR
-3-5,Torso,END→STR→DEX
-1-2,Arm/Leg,STR→DEX→END
+1D,Location
+1,Head
+2,Arms
+3-5,Torso
+6,Legs
 ,,,
 
 
