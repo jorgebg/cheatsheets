@@ -73,48 +73,52 @@
       padding: 10px;
     }
 
+    .grid .gutter-sizer {
+      width: 2%;
+    }
+
     .grid-item--width0 {
       width: auto;
     }
 
     .grid-item--width10 {
-      width: 10%;
+      width: 8%;
     }
 
     .grid-item--width20 {
-      width: 20%;
+      width: 18%;
     }
 
     .grid-item--width30 {
-      width: 30%;
+      width: 28%;
     }
 
     .grid-item--width40 {
-      width: 40%;
+      width: 38%;
     }
 
     .grid-item--width50 {
-      width: 50%;
+      width: 48%;
     }
 
     .grid-item--width60 {
-      width: 60%;
+      width: 58%;
     }
 
     .grid-item--width70 {
-      width: 70%;
+      width: 68%;
     }
 
     .grid-item--width80 {
-      width: 80%;
+      width: 78%;
     }
 
     .grid-item--width90 {
-      width: 90%;
+      width: 88%;
     }
 
     .grid-item--width100 {
-      width: 100%;
+      width: 98%;
     }
 
     .grid-item > *, .grid-item > * > * {
@@ -183,9 +187,10 @@
           itemSelector: '.grid-item',
           layoutMode: 'packery',
           packery: {
-            gutter: 10
+            gutter: '.gutter-sizer'
           },
           transitionDuration: 0,
+          percentPosition: true
         });
 
         var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
@@ -222,6 +227,7 @@
   <template id="page">
     <div class="sheet padding-10mm">
       <div class="grid">
+      <div class="gutter-sizer">
       </div>
     </div>
   </template>

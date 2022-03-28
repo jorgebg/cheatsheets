@@ -73,48 +73,52 @@
       padding: 10px;
     }
 
+    .grid .gutter-sizer {
+      width: 2%;
+    }
+
     .grid-item--width0 {
       width: auto;
     }
 
     .grid-item--width10 {
-      width: 10%;
+      width: 8%;
     }
 
     .grid-item--width20 {
-      width: 20%;
+      width: 18%;
     }
 
     .grid-item--width30 {
-      width: 30%;
+      width: 28%;
     }
 
     .grid-item--width40 {
-      width: 40%;
+      width: 38%;
     }
 
     .grid-item--width50 {
-      width: 50%;
+      width: 48%;
     }
 
     .grid-item--width60 {
-      width: 60%;
+      width: 58%;
     }
 
     .grid-item--width70 {
-      width: 70%;
+      width: 68%;
     }
 
     .grid-item--width80 {
-      width: 80%;
+      width: 78%;
     }
 
     .grid-item--width90 {
-      width: 90%;
+      width: 88%;
     }
 
     .grid-item--width100 {
-      width: 100%;
+      width: 98%;
     }
 
     .grid-item > *, .grid-item > * > * {
@@ -183,9 +187,10 @@
           itemSelector: '.grid-item',
           layoutMode: 'packery',
           packery: {
-            gutter: 10
+            gutter: '.gutter-sizer'
           },
           transitionDuration: 0,
+          percentPosition: true
         });
 
         var pageBottom = iso.element.parentNode.getBoundingClientRect().bottom;
@@ -222,6 +227,7 @@
   <template id="page">
     <div class="sheet padding-10mm">
       <div class="grid">
+      <div class="gutter-sizer">
       </div>
     </div>
   </template>
@@ -492,6 +498,228 @@
     </section>
     
     <section class="grid-item grid-item--width0">
+      <h1>Animals</h1>
+<div>
+<table>
+<thead>
+<tr>
+<th>Hits</th>
+<th>Trait</th>
+<th>Damage</th>
+<th>Animal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-2</td>
+<td>Small (-4)</td>
+<td>1</td>
+<td>Mouse or Rat</td>
+</tr>
+<tr>
+<td>3-5</td>
+<td>Small (-3)</td>
+<td>D3</td>
+<td>Cat or Raccoon</td>
+</tr>
+<tr>
+<td>6-7</td>
+<td>Small (-2)</td>
+<td>D3</td>
+<td>Badger or Dog</td>
+</tr>
+<tr>
+<td>8-13</td>
+<td>Small (-1)</td>
+<td>1D</td>
+<td>Chimpanzee or Goat</td>
+</tr>
+<tr>
+<td><strong>14-28</strong></td>
+<td><strong>Medium (0)</strong></td>
+<td><strong>1D</strong></td>
+<td><strong>Human</strong></td>
+</tr>
+<tr>
+<td>29-35</td>
+<td>Large (+1)</td>
+<td>2D</td>
+<td>Cow or Horse</td>
+</tr>
+<tr>
+<td>36-49</td>
+<td>Large (+2)</td>
+<td>3D</td>
+<td>Shark</td>
+</tr>
+<tr>
+<td>50-70</td>
+<td>Large (+3)</td>
+<td>4D</td>
+<td>Rhino</td>
+</tr>
+<tr>
+<td>71-90</td>
+<td>Large (+4)</td>
+<td>5D</td>
+<td>Elephant</td>
+</tr>
+<tr>
+<td>91-125</td>
+<td>Large (+5)</td>
+<td>6D</td>
+<td>Carnosaur</td>
+</tr>
+<tr>
+<td>125 or more</td>
+<td>Large (+6)</td>
+<td>7D</td>
+<td>Sauropod or Whale</td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer>Core Rules, page 81</footer>
+    </section>
+    
+    <section class="grid-item grid-item--width40">
+      <h1>Damage</h1>
+<p>Add the Effect of the attack roll to this damage.</p>
+<ul>
+<li>Damage is applied initially to the target’s <code>END</code>.</li>
+<li>If a target is reduced to <code>END 0</code>, then further damage is subtracted from the
+target’s <code>STR</code> or <code>DEX</code> (target’s choice, but all the damage from
+a single attack must be subtracted from a single statistic).</li>
+<li>If either <code>STR</code> or <code>DEX</code> is reduced to 0, the character is unconscious
+and any further damage is subtracted from the remaining physical
+characteristic.</li>
+<li>If all three physical characteristics are reduced to 0,
+the character is killed.</li>
+</ul>
+      <footer>Core Rules, page 74</footer>
+    </section>
+    
+    <section class="grid-item grid-item--width0">
+      <h1>Hit Locations</h1>
+<div>
+<table>
+<thead>
+<tr>
+<th>1D</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Head</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Arms</td>
+</tr>
+<tr>
+<td>3-5</td>
+<td>Torso</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Legs</td>
+</tr>
+</tbody>
+</table>
+</div>
+      <footer>Companion, page 51</footer>
+    </section>
+    
+    <section class="grid-item grid-item--width40">
+      <h1>Wealth</h1>
+<div style="float:left;margin-right:1em;width:50%">
+<p>Spending more money requires <code>WLT DM-1</code> per 5,000 Credits spent.</p>
+<p>On failure choose either:</p>
+<ul>
+<li>Reduce <code>WLT</code> by -1 and try again</li>
+<li>Not make the purchase and avoid the reduction</li>
+</ul>
+</div>
+<div style="float:right">
+<div>
+<table>
+<thead>
+<tr>
+<th>WLT</th>
+<th>Monthly Cash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>100 Credits</td>
+</tr>
+<tr>
+<td>2</td>
+<td>200 Credits</td>
+</tr>
+<tr>
+<td>3</td>
+<td>400 Credits</td>
+</tr>
+<tr>
+<td>4</td>
+<td>800 Credits</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1200 Credits</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1500 Credits</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2000 Credits</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3000 Credits</td>
+</tr>
+<tr>
+<td>9</td>
+<td>5000 Credits</td>
+</tr>
+<tr>
+<td>10</td>
+<td>7500 Credits</td>
+</tr>
+<tr>
+<td>11</td>
+<td>10000 Credits</td>
+</tr>
+<tr>
+<td>12</td>
+<td>12500 Credits</td>
+</tr>
+<tr>
+<td>13</td>
+<td>15000 Credits</td>
+</tr>
+<tr>
+<td>14</td>
+<td>17500 Credits</td>
+</tr>
+<tr>
+<td>15</td>
+<td>20000 Credits</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+      <footer>Companion, page 3</footer>
+    </section>
+    
+    <section class="grid-item grid-item--width0">
       <h1>Lower Technology Levels</h1>
 <h2>Up to Earth's 21st century</h2>
 <div>
@@ -636,224 +864,6 @@
 </table>
 </div>
       <footer></footer>
-    </section>
-    
-    <section class="grid-item grid-item--width0">
-      <h1>Animals</h1>
-<div>
-<table>
-<thead>
-<tr>
-<th>Hits</th>
-<th>Trait</th>
-<th>Damage</th>
-<th>Animal</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1-2</td>
-<td>Small (-4)</td>
-<td>1</td>
-<td>Mouse or Rat</td>
-</tr>
-<tr>
-<td>3-5</td>
-<td>Small (-3)</td>
-<td>D3</td>
-<td>Cat or Raccoon</td>
-</tr>
-<tr>
-<td>6-7</td>
-<td>Small (-2)</td>
-<td>D3</td>
-<td>Badger or Dog</td>
-</tr>
-<tr>
-<td>8-13</td>
-<td>Small (-1)</td>
-<td>1D</td>
-<td>Chimpanzee or Goat</td>
-</tr>
-<tr>
-<td><strong>14-28</strong></td>
-<td><strong>Medium (0)</strong></td>
-<td><strong>1D</strong></td>
-<td><strong>Human</strong></td>
-</tr>
-<tr>
-<td>29-35</td>
-<td>Large (+1)</td>
-<td>2D</td>
-<td>Cow or Horse</td>
-</tr>
-<tr>
-<td>36-49</td>
-<td>Large (+2)</td>
-<td>3D</td>
-<td>Shark</td>
-</tr>
-<tr>
-<td>50-70</td>
-<td>Large (+3)</td>
-<td>4D</td>
-<td>Rhino</td>
-</tr>
-<tr>
-<td>71-90</td>
-<td>Large (+4)</td>
-<td>5D</td>
-<td>Elephant</td>
-</tr>
-<tr>
-<td>91-125</td>
-<td>Large (+5)</td>
-<td>6D</td>
-<td>Carnosaur</td>
-</tr>
-<tr>
-<td>125 or more</td>
-<td>Large (+6)</td>
-<td>7D</td>
-<td>Sauropod or Whale</td>
-</tr>
-</tbody>
-</table>
-</div>
-      <footer>Core Rules, page 81</footer>
-    </section>
-    
-    <section class="grid-item grid-item--width40">
-      <h1>Damage</h1>
-<p>Add the Effect of the attack roll to this damage.</p>
-<ul>
-<li>Damage is applied initially to the target’s <code>END</code>.</li>
-<li>If a target is reduced to <code>END 0</code>, then further damage is subtracted from the
-target’s <code>STR</code> or <code>DEX</code> (target’s choice, but all the damage from
-a single attack must be subtracted from a single statistic).</li>
-<li>If either <code>STR</code> or <code>DEX</code> is reduced to 0, the character is unconscious
-and any further damage is subtracted from the remaining physical
-characteristic.</li>
-<li>If all three physical characteristics are reduced to 0,
-the character is killed.</li>
-</ul>
-      <footer>Core Rules, page 74</footer>
-    </section>
-    
-    <section class="grid-item grid-item--width0">
-      <h1>Hit Locations</h1>
-<div>
-<table>
-<thead>
-<tr>
-<th>1D</th>
-<th>Location</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Head</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Arms</td>
-</tr>
-<tr>
-<td>3-5</td>
-<td>Torso</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Legs</td>
-</tr>
-</tbody>
-</table>
-</div>
-      <footer>Companion, page 51</footer>
-    </section>
-    
-    <section class="grid-item grid-item--width20">
-      <h1>Wealth</h1>
-<p>Spending more money requires <code>WLT DM-1</code> per 5,000 Credits spent.</p>
-<p>On failure choose either:</p>
-<ul>
-<li>Reduce <code>WLT</code> by -1 and try again</li>
-<li>Not make the purchase and avoid the reduction</li>
-</ul>
-<div>
-<table>
-<thead>
-<tr>
-<th>WLT</th>
-<th>Monthly Cash</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>100 Credits</td>
-</tr>
-<tr>
-<td>2</td>
-<td>200 Credits</td>
-</tr>
-<tr>
-<td>3</td>
-<td>400 Credits</td>
-</tr>
-<tr>
-<td>4</td>
-<td>800 Credits</td>
-</tr>
-<tr>
-<td>5</td>
-<td>1200 Credits</td>
-</tr>
-<tr>
-<td>6</td>
-<td>1500 Credits</td>
-</tr>
-<tr>
-<td>7</td>
-<td>2000 Credits</td>
-</tr>
-<tr>
-<td>8</td>
-<td>3000 Credits</td>
-</tr>
-<tr>
-<td>9</td>
-<td>5000 Credits</td>
-</tr>
-<tr>
-<td>10</td>
-<td>7500 Credits</td>
-</tr>
-<tr>
-<td>11</td>
-<td>10000 Credits</td>
-</tr>
-<tr>
-<td>12</td>
-<td>12500 Credits</td>
-</tr>
-<tr>
-<td>13</td>
-<td>15000 Credits</td>
-</tr>
-<tr>
-<td>14</td>
-<td>17500 Credits</td>
-</tr>
-<tr>
-<td>15</td>
-<td>20000 Credits</td>
-</tr>
-</tbody>
-</table>
-</div>
-      <footer>Companion, page 3</footer>
     </section>
     
   </template>
