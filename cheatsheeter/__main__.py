@@ -7,6 +7,8 @@ import markdown
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
+DEFAULT_PAGE_SETUP = "A4 landscape"
+DEFAULT_FONT_SIZE = "16px"
 DEFAULT_SECTION_SEPARATOR = '~~~'
 DEFAULT_OUTPUT_FILE = '{source}.html'
 DEFAULT_SOURCE_PATH = './cheatsheets'
@@ -55,15 +57,20 @@ class Cheatsheeter:
         section_list = []
 
         cheatsheet_template = self.template_env.get_template("cheatsheet.html")
-
+        page_setup = DEFAULT_PAGE_SETUP
+        font_size = DEFAULT_FONT_SIZE
         for section_src in section_src_list:
             content_html = self.md.convert(section_src.strip())
             meta = {k: v[0] for k,v in self.md.Meta.items()}
             meta.setdefault('title', source_filename.title())
+            if 'page_setup' in meta:
+                page_setup = meta.pop('page_setup')
+            if 'font_size' in meta:
+                font_size = meta.pop('font_size')
             section_list.append(Section(content_html=content_html, **meta))
             self.md.Meta = {}  # Clean Meta attribute, otherwise it will be carried over to the next section
 
-        output_html = cheatsheet_template.render(title=title, section_list=section_list)
+        output_html = cheatsheet_template.render(title=title, page_setup=page_setup, font_size=font_size, section_list=section_list)
 
         build_filename = title + '.html'
         with open(os.path.join(self.build_path, build_filename), 'w') as f:

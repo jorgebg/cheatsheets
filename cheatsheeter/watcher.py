@@ -34,6 +34,11 @@ def start(cheatsheeter: Cheatsheeter):
                 return None
             elif event.event_type in ('created', 'modified'):
                 print("{} was {}".format(event.src_path, event.event_type))
-                cheatsheeter.build()
+                try:
+                    cheatsheeter.build()
+                except KeyboardInterrupt:
+                    raise
+                except Exception as e:
+                    print('Error:', e)
     watch = FileChangesWatcher()
     watch.run()

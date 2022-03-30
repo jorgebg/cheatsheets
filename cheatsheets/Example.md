@@ -1,3 +1,6 @@
+page_setup: A4 portrait
+
+
 # Small section
 
 This is a **small** section.

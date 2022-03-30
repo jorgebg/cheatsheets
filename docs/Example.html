@@ -12,7 +12,7 @@
   <!-- Set also "landscape" if you need -->
   <style>
     @page {
-      size: A4 landscape
+      size: A4 portrait
     }
 
     :root {
@@ -28,6 +28,10 @@
       font-size: var(--base-font-size);
       text-align: justify;
       text-justify: inter-word;
+    }
+
+    td {
+      text-align: left;
     }
 
     h1,
@@ -132,6 +136,7 @@
 
     .grid-item table {
       margin-block-end: 1em;
+      break-inside: avoid;
     }
 
     .grid-item thead tr {
@@ -222,7 +227,7 @@
 <!-- Set "A5", "A4" or "A3" for class name -->
 <!-- Set also "landscape" if you need -->
 
-<body class="A4 landscape">
+<body class="A4 portrait">
 
   <template id="page">
     <div class="sheet padding-10mm">
