@@ -70,6 +70,8 @@ font_size: 14px
 ,Subterfugio, Deception
 ,Supervivencia, Survival
 ,Táctica, Tactics
+,├ Militar    , ├ Military
+,└ Naval      , └ Naval
 ,Trajes,Vacc Suit
 ,,,
 
